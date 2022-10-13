@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightVariation: 5
   pipePrefab: {fileID: 8526002795258020669, guid: dbd379cac01cf674f9e760a0be491712, type: 3}
-  spawnerInterval: 1
+  pipeSpawnerInterval: 2
 --- !u!1 &1275271592
 GameObject:
   m_ObjectHideFlags: 0

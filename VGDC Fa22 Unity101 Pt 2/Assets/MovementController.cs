@@ -51,17 +51,6 @@ public class MovementController : MonoBehaviour
     }
 
     /**
-     * Checks if the player is colliding with a hazard
-     */
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Hazard"))
-        {
-            GameOver();
-        }
-    }
-
-    /**
      * Ends the game if a player loses
      */
     void GameOver()
@@ -74,8 +63,16 @@ public class MovementController : MonoBehaviour
      * Increments the player's score if they get past an obstacle
      * is separate from OnCollisionEnter, as triggers do not collide with the player
      */
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.CompareTag("Hazard"))
+        {
+            {
+                GameOver();
+                return;
+            }
+        }
+
         score += 1;
         scoreText.text = score.ToString();
     }

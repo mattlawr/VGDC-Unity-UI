@@ -6,6 +6,7 @@ using TMPro;
 public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
 {
     private bool shieldOn;
+    public GameObject shieldObjectOverlay;
 
     public TMP_Text scoreText;
     public GameObject GameOverScreen;
@@ -15,7 +16,7 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
     private Rigidbody2D rb;
 
     private const int OUTOFBOUNDS = 9;
-    private const int POWERUPTIME = 5;
+    private const float POWERUPTIME = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +92,17 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
             Destroy(collider.gameObject);
             shieldOn = true;
             StartCoroutine(disableShield());
+            return;
         }
+
+        else if (collider.CompareTag("ShrinkPowerup"))
+        {
+            Destroy(collider.gameObject);
+            transform.localScale = transform.localScale * 0.5f;
+            StartCoroutine(unShrink());
+            return;
+        }
+        
         score += 1;
         scoreText.text = score.ToString();
 
@@ -100,7 +111,16 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
 
     IEnumerator disableShield()
     {
+        GameObject spawnedShield = Instantiate(shieldObjectOverlay, transform);
+        spawnedShield.transform.parent = transform;
         yield return new WaitForSeconds(POWERUPTIME);
         shieldOn = false;
+        Destroy(spawnedShield);
+    }
+
+    IEnumerator unShrink()
+    {
+        yield return new WaitForSeconds(POWERUPTIME);
+        transform.localScale = transform.localScale * 2f;
     }
 }
