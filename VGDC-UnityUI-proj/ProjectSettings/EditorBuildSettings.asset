@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/WorkshopScene.unity
-    guid: 0b6683b3b77204b48abd5e8d31d924e6
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/wkshop-done.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

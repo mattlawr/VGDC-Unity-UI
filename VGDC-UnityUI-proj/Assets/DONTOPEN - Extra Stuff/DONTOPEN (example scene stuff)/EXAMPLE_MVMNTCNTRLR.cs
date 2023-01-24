@@ -10,10 +10,14 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
 
     public TMP_Text scoreText;
     public GameObject GameOverScreen;
+    private bool gameOver = false;
 
     private int score;
     public float jumpSpeed;
     private Rigidbody2D rb;
+
+    public GameObject PauseScreen;
+    private bool gamePaused = false;    // Note -- this is kinda awkward to put in a player movement script FYI
 
     private const int OUTOFBOUNDS = 9;
     private const float POWERUPTIME = 2.5f;
@@ -24,6 +28,9 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
         shieldOn = false;
         GameOverScreen.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+
+        if (PauseScreen) PauseScreen.SetActive(false);
+        else Debug.LogWarning("Pause menu reference not set. Please check Player object in inspector");
     }
 
     // Update is called once per frame
@@ -45,6 +52,12 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
         {
             Jump();
         }
+
+        // UI stuff vvv
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Pause();
+        }
     }
 
     /**
@@ -57,12 +70,34 @@ public class EXAMPLE_MVMNTCNTRLR : MonoBehaviour
             rb.velocity = new Vector2(0, jumpSpeed);
     }
 
+    /**
+     * Toggles the game's pause state
+     */
+    public void Pause()
+    {
+        if(gameOver)
+        {
+            Debug.Log("Pause game failed: cannot pause after game over!");
+            return;
+        }
+
+        gamePaused = !gamePaused;   // toggle the bool
+
+        PauseScreen.SetActive(gamePaused);
+        
+        Time.timeScale = gamePaused ? 0 : 1; // sets the game to either freeze (0) or play (1)
+        /// the above is equivalent to:
+        /// if(gamePaused) Time.timescale = 0; else Time.timescale = 1;
+        /// this is called a ternary operator!
+    }
+
 
     /**
      * Ends the game if a player loses
      */
     void GameOver()
     {
+        gameOver = true;
         GameOverScreen.SetActive(true);
         Debug.Log("GAME OVER! Score: " + score);
         Time.timeScale = 0; // sets the time scale of the game to 0
