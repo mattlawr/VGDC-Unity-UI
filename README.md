@@ -1,5 +1,8 @@
 # VGDC-Unity-UI Workshop starter code
 #### by Matthew
+
+see the [writeup doc](https://docs.google.com/document/d/1r-6OgVKXHWgDnmWcVcGjia1bnYsh5gK6apO8PmIcxwQ/edit?usp=sharing)
+
 Source code repo for the Unity UI workshop for the Video Game Development Club @ UC San Diego
 Workshop goes in depth on Unity's UI system focusing on making menus, orienting them, and ensuring correct spacing for arbitrary resolutions.
 
