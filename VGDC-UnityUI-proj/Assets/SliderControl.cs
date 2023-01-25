@@ -40,4 +40,9 @@ public class SliderControl : MonoBehaviour
         // assumes input is a value from 0 to 100
         AudioListener.volume = Mathf.Clamp01(v / 100.0f);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
